@@ -13,18 +13,25 @@ class Employee {
     console.log("Welcome to Employee Payroll Application");
   }
 
-  // Method to mark attendance randomly (UC3)
+  // UC1 - Method to mark attendance randomly (Absent / Part-Time / Full-Time)
   markAttendance() {
-    let attendanceType = Math.floor(Math.random() * 3); // 0: Absent, 1: Present, 2: Half Day
-    if (attendanceType === 0) {
-      this.attendance = "Absent";
-      this.workingHours = 0;
-    } else if (attendanceType === 1) {
-      this.attendance = "Present";
-      this.workingHours = 8;
-    } else {
-      this.attendance = "Half Day";
-      this.workingHours = 4;
+    let attendanceType = Math.floor(Math.random() * 3); // 0, 1, or 2
+    switch (attendanceType) {
+      case 0:
+        this.attendance = "Absent";
+        this.workingHours = 0;
+        break;
+      case 1:
+        this.attendance = "Part-Time";
+        this.workingHours = 4;
+        break;
+      case 2:
+        this.attendance = "Full-Time";
+        this.workingHours = 8;
+        break;
+      default:
+        this.attendance = "Unknown";
+        this.workingHours = 0;
     }
   }
 
@@ -34,7 +41,7 @@ class Employee {
     this.dailyWage = WAGE_PER_HOUR * this.workingHours;
   }
 
-  // Display employee details (UC3)
+  // UC3 - Display employee details
   displayDetails() {
     console.log(
       `Employee ID: ${this.empId}, Name: ${this.empName}, Attendance: ${this.attendance}, Working Hours: ${this.workingHours}, Daily Wage: ₹${this.dailyWage}`
@@ -56,6 +63,6 @@ let empDetails = [
 // Mark attendance, calculate wage, and display details
 empDetails.forEach((employee) => {
   employee.markAttendance();
-  employee.calculateWage();
+  employee.calculateWage(); // UC2 + UC3
   employee.displayDetails();
 });
